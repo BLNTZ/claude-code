@@ -18,7 +18,8 @@ import { getAgentId } from './teammate.js'
 export type SessionKind = 'interactive' | 'bg' | 'daemon' | 'daemon-worker'
 export type SessionStatus = 'busy' | 'idle' | 'waiting'
 
-function getSessionsDir(): string {
+/** Registry of live sessions — also read by peerRegistry.ts for peer discovery. */
+export function getSessionsDir(): string {
   return join(getClaudeConfigHomeDir(), 'sessions')
 }
 
