@@ -113,9 +113,13 @@ export const nodejsHeapUsedBytes = new Gauge({
   },
 });
 
+// NB: prom-client's collectDefaultMetrics() already registers the reserved
+// `nodejs_eventloop_lag_seconds` (plus percentile variants). Registering a
+// second metric under that name throws at module load, so this app-level
+// histogram uses a distinct name.
 export const eventLoopLagSeconds = new Histogram({
-  name: "nodejs_eventloop_lag_seconds",
-  help: "Event-loop lag sampled every 500 ms",
+  name: "app_eventloop_lag_seconds",
+  help: "Event-loop lag sampled every 500 ms by the app sampler",
   buckets: [0.001, 0.005, 0.01, 0.05, 0.1, 0.5, 1],
   registers: [registry],
 });
