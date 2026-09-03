@@ -45,6 +45,8 @@ export default defineConfig({
     alias: [
       // The source uses baseUrl:"." in tsconfig so bare "src/..." imports resolve from root
       { find: /^src\//, replacement: resolve(__dirname, 'src') + '/' },
+      // local-desk tests import its source with a bare "local-desk/..." prefix
+      { find: /^local-desk\//, replacement: resolve(__dirname, 'local-desk/src') + '/' },
       // bun:bundle is a Bun bundler virtual module; redirect to the dev shim
       { find: 'bun:bundle', replacement: resolve(__dirname, 'src/shims/bun-bundle.ts') },
     ],
